@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 
 import { FavoriteType } from "../types/favoritesType"
 import { BreedDetailsProps } from "../types/breedDetailsProps"
-
+import Alert from "./Alert";
 import { server_calls } from "../api/server"
 import { dog_server_calls } from "../api/dog_server"
 
@@ -32,6 +32,11 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
   const [favNotes, setFavNotes] = useState('')
   // notes loaded onto the card for display
   const [prevNotes, setPrevNotes] = useState(favList.notes)
+
+  const [alert, setAlert] = useState(false);
+
+  const openAlert = () => setAlert(true);
+  const closeAlert = () => setAlert(false);
 
   // Data to fill FavoritesTile
   const [favData, setFavData] = useState<BreedDetailsProps>()
@@ -62,6 +67,7 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
     console.log(data)
     server_calls.update_note(favList.breedNotes_Id, data)
     setPrevNotes(favNotes)
+    openAlert();
     setFavNotes('')
   }
 
@@ -170,6 +176,14 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                   Delete Favorite
                 </button>
               </div>
+              { alert ? 
+                (
+                  <Alert
+                    onClose={closeAlert}
+                    message="The changes to your notes have been saved."
+                  />
+                ) : (<></>)
+              }
             </article>
           </form>
         ) : null

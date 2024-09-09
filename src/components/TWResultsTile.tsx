@@ -1,16 +1,20 @@
-// Attempt to use TailWindCSS to create reusable card
-import { BreedDetailsProps } from '../types/breedDetailsProps';
-
 import { ChangeEventHandler, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { server_calls } from '../api/server';
 import { useAuth0 } from '@auth0/auth0-react';
+
+import Alert from './Alert';
+import { BreedDetailsProps } from '../types/breedDetailsProps';
+import { server_calls } from '../api/server';
+
 
 // Passing in breedDetails from Results.tsx to populate the <Card>
 const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) => {
   const { register, handleSubmit } = useForm({})
   const { user } = useAuth0();
+  const [alert, setAlert] = useState(false)
 
+  const openAlert = () => setAlert(true);
+  const closeAlert = () => setAlert(false);
 
   // setting up state for the notes users can write if they wish to save a breed as a favorite
   const [notes, setNotes] = useState<string>('')
@@ -33,7 +37,9 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
       'image_id': breedDetails.breeds[0].reference_image_id,
       'user_id': user?.sub
     })
-    setNotes('')
+    openAlert();
+    setNotes('');
+
   }
 
   return (
@@ -44,11 +50,12 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
             className='flex flex-direction-row py-5 justify-center bg-[#EFF2C0]'
           >
             <article className='rounded-xl border-2 border-gray-700 bg-[#EAE2B7] p-4 object-contain'>
+
               <div className='flex justify-around space-x-2'>
-                <img 
+                <img
                   alt='picture of the chosen breed'
                   src={breedDetails.url}
-                  // TODO: fix flex of image
+                  // TODO: fix flex of image. card needs to be the same size each time while allowing flex
                   className='flex-2 max-w-md rounded-full object-contain shadow-xl
                           aspect-auto'
                 />
@@ -123,6 +130,7 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
               </div>
               <div className='flex justify-end'>
                 <button
+                  // TODO: add success alert
                   type='submit'
                   id='favorite-button'
                   disabled={notes.length === 0}
@@ -132,10 +140,21 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
                   Add Favorite
                 </button>
               </div>
+              {alert ? 
+                (
+                  <Alert
+                    onClose={closeAlert}
+                    message='Your favorites list has been updated.'
+                  />
+                ) : (<></>)
+              }
             </article>
+            
           </form>
+
         ) : (null)
       }
+
     </div>
   )
 }
