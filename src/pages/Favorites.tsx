@@ -9,38 +9,35 @@ const Favorites: React.FC = () => {
   const { user } = useAuth0()
 
   const getFavList = async () => {
-    const data = await server_calls.get_notes( user?.sub )
+    const data = await server_calls.get_notes(user?.sub)
     console.log(data)
     setFavList(data)
   }
-  useEffect( () => {
+  useEffect(() => {
     getFavList()
-  }, [] )
-    // return favData for each tile or this handled in FavoritesTile.tsx?
+  }, [])
+  // return favData for each tile or this handled in FavoritesTile.tsx?
 
   return (
     <div>
-      {favList ?
+      {favList.length ?
         (
           <div className="favorites-tiles">
-          {/* <FavoritesTile
-            { ...favList}
-          /> */}
-        {/* get request from get_notes */}
-          { favList.map((item, index) => (
-            <FavoritesTile 
-              key={index} 
-              breedNotes_Id={item.breedNotes_Id} 
-              notes={item.notes}
-              user_id={item.user_id}
-              image_id={item.image_id}
-            />
-          ))}
-        </div>
-        ) : (<>Loading...</>)}
-              
+            {/* get request from get_notes */}
+            {favList.map((item, index) => (
+              <FavoritesTile
+                key={index}
+                breedNotes_Id={item.breedNotes_Id}
+                notes={item.notes}
+                user_id={item.user_id}
+                image_id={item.image_id}
+              />
+            ))}
+          </div>
+        ) : (<> Loading...</>)}
+
     </div>
   )
 }
 
-export default withAuthenticationRequired(Favorites, {onRedirecting: () => <div>Redirecting you to the login page...</div>,})
+export default withAuthenticationRequired(Favorites, { onRedirecting: () => <div>Redirecting you to the login page...</div>, })
