@@ -20,7 +20,9 @@ const Favorites: React.FC = () => {
 
   return (
     <div>
-        <div className="favorites-tiles">
+      {favList ?
+        (
+          <div className="favorites-tiles">
           {/* <FavoritesTile
             { ...favList}
           /> */}
@@ -34,7 +36,9 @@ const Favorites: React.FC = () => {
               image_id={item.image_id}
             />
           ))}
-        </div>      
+        </div>
+        ) : (<>Loading...</>)}
+              
     </div>
   )
 }

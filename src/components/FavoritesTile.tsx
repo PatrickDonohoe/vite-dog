@@ -79,24 +79,23 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
             onSubmit={handleSubmit(onSubmitUpdate)}
             className="flex flex-direction-row justify-center py-5 bg-[#EFF2C0]"
           >
-            <article className='rounded-xl border-2 border-gray-700 bg-[#EAE2B7] p-4 object-contain'>
+            <article className='container rounded-xl border-2 border-gray-700 bg-[#EAE2B7] p-4 object-contain max-w-xl'>
               <div className='flex justify-around space-x-2'>
                 <img 
                   alt='picture of the chosen breed'
                   src={favData.url}
-                  // TODO: fix flex of image
+                  // TODO: change aspect size
                   className='flex-2 max-w-md rounded-full object-contain shadow-xl aspect-auto'
                 />
-                <div className='flex flex-col m-auto justify-center bg-[#FCBF49] border-[#D62828] 
-                  border-2 rounded-md 
-                  '>
+                <div className='flex flex-col m-auto justify-center p-1 bg-[#FCBF49] border-[#D62828] 
+                  border-2 rounded-md'>
                   <h3 className='flex text-lg font-medium justify-center text-[#D62828]'>
                     Breed Name:
                   </h3>
                   <h3 className='flex text-lg font-medium justify-center text-center text-[#D62828]'>
                     {favData.breeds[0].name}
                   </h3>
-                  <div flex-1>
+                  {/* <div flex-1>
                     <ul className='m-1 flex flex-wrap justify-center'>
                       <li className='p-1 leading-none'>
                         <a href='#' className='text-xs font-medium text-[#003049] text-center'>
@@ -104,7 +103,7 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <ul className='mt-4 p-4 space-y-2 bg-[#FCBF49] border-[#D62828] 
