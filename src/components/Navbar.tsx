@@ -50,7 +50,7 @@ function Navbar() {
       </div>
       
 
-      {/* if the window is small & dropDown is true OR the window is large, display the navbar, else nothing but the hamburger */}
+      {/* if the window is small & dropDown is true. display the menu with icons only */}
       {(isSmall && isVisible) ?
         (
           <div className='flex w-4/6 mt-2 '>
