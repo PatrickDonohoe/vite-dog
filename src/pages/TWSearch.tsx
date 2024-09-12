@@ -15,18 +15,18 @@ const TWSearch = () => {
           setBreedDetails = { setBreedDetails }
         />
       </div>
-      {breedDetails
-        ? (
+      {/* {breedDetails
+        ? ( */}
           <div>
             <TWResultsTile 
               breedDetails = { breedDetails as BreedDetailsProps}
             />
           </div>
-        ) : (
+        {/* ) : (
           // Do I store breeds searched in a database and perform queries to display data?
           <div className="bg-gray-200">Top 10 Searched Breeds</div>
         )
-      }
+      } */}
       
     </>
   )
