@@ -69,7 +69,7 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
                   <h3 className='flex text-lg font-medium justify-center text-center text-[#D62828]'>
                     {breedDetails.breeds[0].name}
                   </h3>
-                  <div flex-1>
+                  {/* <div flex-1>
                     <ul className='m-1 flex flex-wrap justify-center'>
                       <li className='p-1 leading-none'>
                         <a href='#' className='text-xs font-medium text-[#003049] text-center'>
@@ -77,7 +77,7 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <ul className='mt-4 p-4 space-y-2 bg-[#FCBF49] border-[#D62828] 
