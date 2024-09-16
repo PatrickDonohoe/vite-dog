@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import NavButton from './NavButton';
+import ClickButton from './ClickButton';
+
 const mobileMediaQuery = '(max-width: 750px)';
 
 function Navbar() {
@@ -42,9 +45,17 @@ function Navbar() {
   // }
 
   return (
-    <nav className='flex flex-direction-row justify-around align-middle bg-[#EAE2B7] border-solid border-2 border-black rounded-sm px-6 py-4 sticky top-0 w-full z-10'>
-      <div className='flex items-center justify-around flex-shrink-0 mr-2 bg-[#FCBF49] p-3 m-5 border border-[#D62828] rounded-md'>
-        <Link to='/' className='flex font-semibold text-xl tracking-tight text-[#003049] hover:text-[#D62828]'>
+    // TODO: add hover text for nav icons
+    <nav className='flex flex-direction-row justify-around align-middle bg-[#EAE2B7] 
+      border-solid border-2 border-black rounded-sm px-2 md:px-6 py-2 md:py-4 sticky 
+      top-0 w-full h-24 z-10'
+    >
+      <div className='flex items-center justify-around flex-shrink-0 mr-2 bg-[#FCBF49] 
+        p-3 m-5 border border-[#D62828] rounded-md'
+      >
+        <Link to='/' className='flex font-semibold text-xl tracking-tight text-[#003049] 
+          hover:text-[#D62828]'
+        >
           Dog Breeds
         </Link>
       </div>
@@ -53,54 +64,33 @@ function Navbar() {
       {/* if the window is small & dropDown is true. display the menu with icons only */}
       {(isSmall && isVisible) ?
         (
-          <div className='flex w-4/6 mt-2 '>
-            <div className="flex text-sm lg:flex-grow border-[#003049] border-2 rounded-md justify-around">
-              <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                <div>
-                  <Link to='' className='flex place-itmes-center mt-4 
-                lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                  >
-                    <i className='fa-solid fa-house'></i>
-                  </Link>
-                </div>
-              </button>
+          <div className='flex justify-around items-center w-4/6'>
+            <div className="flex items-center text-sm lg:flex-grow border-[#003049] border-2 
+              rounded-md justify-around h-16"
+            >
+              {/* Home Button */}
+              <NavButton icon='fa-solid fa-house' route='/' />
 
               {
                 !isAuthenticated ?
-                  <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                    <div>
-                      <Link to='/' onClick={signInOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-white'>
-                        <i className='fa-solid fa-right-to-bracket'></i>
-                      </Link>
-                    </div>
-                  </button>
+                  // Login Button
+                  <ClickButton 
+                    icon='fa-solid fa-right-to-bracket' 
+                    route='/'
+                    onClick={signInOnClick}
+                  />
                   :
                   <>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/twsearch' className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                        >
-                          <i className='fa-solid fa-magnifying-glass'></i>
-                        </Link>
-                      </div>
-                    </button>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/favorites' className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                        >
-                          <i className='fa-solid fa-heart'></i>
-                        </Link>
-                      </div>
-                    </button>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/' onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-white'>
-                          <i className='fa-solid fa-door-open'></i>
-                        </Link>
-                      </div>
-                    </button>
+                    {/* Search Button */}
+                    <NavButton icon='fa-solid fa-magnifying-glass' route='/twsearch'/>
+                    {/* Favorites Button */}
+                    <NavButton icon='fa-solid fa-heart' route='/favorites'/>
+                    {/* Logout Button */}
+                    <ClickButton 
+                      icon='fa-solid fa-door-open' 
+                      route='/' 
+                      onClick={signOutOnClick}
+                    />
                   </>
               }
             </div>
@@ -112,6 +102,7 @@ function Navbar() {
       {isSmall ?
         (
           <div className='block'>
+            {/* Hamburger Button */}
             <button onClick={dropDown} className='flex items-center px-3 py-2 
           text-[#003049] border rounded border-[#003049] hover:text-[#D62828] 
           hover:border-[#D62828]'
@@ -122,54 +113,34 @@ function Navbar() {
         )
         :
         (
-          <div className='flex w-4/6 mt-2 '>
-            <div className="flex text-sm lg:flex-grow border-[#003049] border-2 rounded-md justify-around">
-              <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                <div>
-                  <Link to='' className='flex place-itmes-center mt-4 
-                lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                  >
-                    <i className='fa-solid fa-house'></i> Home
-                  </Link>
-                </div>
-              </button>
+          <div className='flex w-4/6'>
+            <div className="flex text-sm lg:flex-grow border-[#003049] border-2 
+              rounded-md justify-around items-center"
+            >
+              {/* Home Button */}
+              <NavButton icon='fa-solid fa-house' route='/' linkText=' Home'/>
 
               {
                 !isAuthenticated ?
-                  <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                    <div>
-                      <Link to='/' onClick={signInOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-white'>
-                        <i className='fa-solid fa-right-to-bracket'></i> Login
-                      </Link>
-                    </div>
-                  </button>
+                  // Login Button
+                  <ClickButton 
+                    icon='fa-solid fa-right-to-bracket' 
+                    route='/' 
+                    linkText=' Login' 
+                    onClick={signInOnClick}
+                  />
                   :
                   <>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/twsearch' className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                        >
-                          <i className='fa-solid fa-magnifying-glass'></i> Search
-                        </Link>
-                      </div>
-                    </button>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/favorites' className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-white'
-                        >
-                          <i className='fa-solid fa-heart'></i> Favorites
-                        </Link>
-                      </div>
-                    </button>
-                    <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                        <Link to='/' onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-white'>
-                          <i className='fa-solid fa-door-open'></i>  Logout
-                        </Link>
-                      </div>
-                    </button>
+                    <NavButton icon='fa-solid fa-magnifying-glass' route='/twsearch' linkText=' Search'/>
+                    {/* Favorites Button */}
+                    <NavButton icon='fa-solid fa-heart' route='/favorites' linkText=' Favorites'/>
+                    {/* Logout Button */}
+                    <ClickButton 
+                      icon='fa-solid fa-door-open' 
+                      route='/' 
+                      linkText=' Logout' 
+                      onClick={signOutOnClick}
+                    />
                   </>
               }
             </div>

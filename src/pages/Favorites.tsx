@@ -40,4 +40,6 @@ const Favorites: React.FC = () => {
   )
 }
 
-export default withAuthenticationRequired(Favorites, { onRedirecting: () => <div>Redirecting you to the login page...</div>, })
+export default withAuthenticationRequired(Favorites, { onRedirecting: () => 
+  <div>Redirecting you to the login page...</div>, 
+});

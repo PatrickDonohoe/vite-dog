@@ -1,5 +1,3 @@
-// Need a reusable tile to display dog image, dog breed, and various attributes of the dog.
-// Will also include sections for the user to make notes and do CRUD operations.
 import React, { useState, useEffect, ChangeEventHandler } from "react"
 import { useForm } from "react-hook-form"
 
@@ -8,20 +6,7 @@ import { BreedDetailsProps } from "../types/breedDetailsProps"
 import Alert from "./Alert";
 import { server_calls } from "../api/server"
 import { dog_server_calls } from "../api/dog_server"
-
-// interface BreedDetailsProps {
-//   url: string;
-//   breeds: [{
-//     name: string;
-//     breed_group: string;
-//     life_span: string;
-//     height: { metric: string };
-//     weight: { metric: string };
-//     temperament: string;
-//     reference_image_id: string;
-//   }]
-// }
-
+import Background1 from '../assets/images/jakob-owens.jpeg';
 
 // List of favorited dog breeds by the user being passed in
 const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
@@ -55,7 +40,6 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
     setFavNotes(event.target.value)
   }
 
-  // TODO: change state of favList; currently deletes breed but does not remove tile until page refreshes
   const deleteFav = () => {
     server_calls.delete_note(favList.breedNotes_Id)
     setFavData(undefined)
@@ -72,19 +56,23 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
   }
 
   return (
-    <div>
+    <div 
+      className="justify-center bg-cover bg-top bg-local w-full"
+      style={{ backgroundImage: `url(${Background1})` }}
+    >
       {favData
         ? (
           <form 
             onSubmit={handleSubmit(onSubmitUpdate)}
-            className="flex flex-direction-row justify-center py-5 bg-[#EFF2C0]"
+            className="flex flex-direction-row justify-center py-5"
           >
-            <article className='container rounded-xl border-2 border-gray-700 bg-[#EAE2B7] p-4 object-contain max-w-xl'>
-              <div className='flex justify-around space-x-2'>
+            <article className='container rounded-xl border-2 border-gray-700 bg-[#EAE2B7] 
+              p-2 object-contain max-w-2xl'
+            >
+              <div className='flex flex-col md:flex-row items-center space-y-2'>
                 <img 
                   alt='picture of the chosen breed'
                   src={favData.url}
-                  // TODO: change aspect size
                   className='flex-2 max-w-md rounded-full object-contain shadow-xl aspect-auto'
                 />
                 <div className='flex flex-col m-auto justify-center p-1 bg-[#FCBF49] border-[#D62828] 
@@ -95,6 +83,7 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                   <h3 className='flex text-lg font-medium justify-center text-center text-[#D62828]'>
                     {favData.breeds[0].name}
                   </h3>
+                  {/* TODO: add in adoptable pets if time allows */}
                   {/* <div flex-1>
                     <ul className='m-1 flex flex-wrap justify-center'>
                       <li className='p-1 leading-none'>

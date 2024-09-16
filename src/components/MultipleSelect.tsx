@@ -76,8 +76,9 @@ const MultipleSelect: React.FC<Props> = ({ setBreedDetails }) => {
   }
 
   return (
+    // TODO: add color gradient to this div getting darker as it goes to the edges
     <div className='bg-[#FCBF49]'>
-      <form className='flex justify-center pt-2 items-center' onSubmit={(onSubmitSelect)}>
+      <form className='flex justify-center md:pt-2 items-center' onSubmit={(onSubmitSelect)}>
         <FormControl className=' justify-center' sx={{ m: 2 }}>
           {/* <Stack
             spacing={2}
@@ -101,7 +102,8 @@ const MultipleSelect: React.FC<Props> = ({ setBreedDetails }) => {
               value={selectedBreed}
               id="breed_name=multiple-name"
               onChange={handleBreedNameChange}
-              sx={{ width: 400, height: 60 }}
+              autoWidth={true}
+              sx={{ width: 300, height: 60 }}
             >
 
               {/* display all breed names listed in the dog_dict table */}
