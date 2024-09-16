@@ -21,8 +21,10 @@ function Home() {
             This website was created to help prospective puppy parents learn more about
             the dog breeds they are interested in welcoming into their family. Navigate
             to the
-            <Link to='/twsearch' className='text-blue-700 font-bold'><i> Search </i></Link>
-            page to explore different breed and their characteristics.
+            <Link to='/twsearch' className='text-blue-700 font-bold'>
+              <i> Search </i>
+            </Link>
+            page to explore different breeds and their characteristics.
           </p>
         </div>     
         <div className='w-1/2'>
