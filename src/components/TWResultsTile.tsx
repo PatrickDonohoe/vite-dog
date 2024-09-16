@@ -53,8 +53,9 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
         <form onSubmit={handleSubmit(onSubmitFavorite)}
           className='flex flex-direction-row py-5 justify-center'
         >
-          <article className='rounded-xl border-2 border-gray-700 bg-[#EAE2B7] p-4 object-contain'>
-            <div className='flex justify-around space-x-2'>
+          <article className='container rounded-xl border-2 border-gray-700 bg-[#EAE2B7] 
+              p-2 object-contain max-w-2xl'>
+            <div className='flex flex-col md:flex-row items-center space-y-2'>
               <img
                 alt='picture of the chosen breed'
                 src={breedDetails.url}
