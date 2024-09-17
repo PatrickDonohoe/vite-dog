@@ -159,3 +159,25 @@ const TWResultsTile = ({ breedDetails }: { breedDetails: BreedDetailsProps }) =>
 }
 
 export default TWResultsTile;
+
+// useEffect( () => {
+//   const getMovie = async () => {
+//   const response = await fetch(`${baseUrl}/${params.id}?api_key=${APIKEY}`);
+//       if (response.ok) {
+//           const data = await response.json();
+//           if (data !== null) {
+//               setMovie(data);
+//           }
+//       } else {
+//           const handleError = () => {
+//               alert('Movie not found');
+//               setTimeout( () => {
+//                   history('/');
+//               }, 1000);
+//           }
+//           handleError();
+//       }
+//   }
+//   getMovie();
+
+// }, []);
