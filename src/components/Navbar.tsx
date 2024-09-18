@@ -46,12 +46,12 @@ function Navbar() {
 
   return (
     // TODO: add hover text for nav icons
-    <nav className='flex flex-direction-row justify-around align-middle bg-[#EAE2B7] 
+    <nav className='flex flex-direction-row justify-around items-center bg-[#EAE2B7] 
       border-solid border-2 border-black rounded-sm px-2 md:px-6 py-2 md:py-4 sticky 
       top-0 w-full h-24 z-10'
     >
-      <div className='flex items-center justify-around flex-shrink-0 mr-2 bg-[#FCBF49] 
-        p-3 m-5 border border-[#D62828] rounded-md'
+      <div className='flex items-center justify-center flex-shrink-0 mr-2 bg-[#FCBF49] 
+        p-4 m-5 border border-[#D62828] rounded-md'
       >
         <Link to='/' className='flex font-semibold text-xl tracking-tight text-[#003049] 
           hover:text-[#D62828]'

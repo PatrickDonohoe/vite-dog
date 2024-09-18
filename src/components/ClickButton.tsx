@@ -10,7 +10,7 @@ interface ClickButtonProps {
 const ClickButton = (props: ClickButtonProps) => {
   return (
     <div>
-      <button className='p-1 md:p-3 m-1 md:m-3 h-10 bg-custom_yellow2 hover:bg-custom_orange 
+      <button className='p-1 md:p-3 m-1 md:m-3 h-12 bg-custom_yellow2 hover:bg-custom_orange 
                 justify-center border-custom_red border rounded-md'
       >
         <div>
