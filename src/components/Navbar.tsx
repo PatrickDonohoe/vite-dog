@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import NavButton from './NavButton';
 import ClickButton from './ClickButton';
 
-const mobileMediaQuery = '(max-width: 750px)';
+const mobileMediaQuery = '(max-width: 767px)';
 
 function Navbar() {
 
@@ -64,9 +64,9 @@ function Navbar() {
       {/* if the window is small & dropDown is true. display the menu with icons only */}
       {(isSmall && isVisible) ?
         (
-          <div className='flex justify-around items-center w-4/6'>
+          <div className='flex justify-around items-center w-2/3'>
             <div className="flex items-center text-sm lg:flex-grow border-[#003049] border-2 
-              rounded-md justify-around h-16"
+              rounded-md justify-around h-16 w-3/4"
             >
               {/* Home Button */}
               <NavButton icon='fa-solid fa-house' route='/' />
@@ -113,7 +113,7 @@ function Navbar() {
         )
         :
         (
-          <div className='flex w-4/6'>
+          <div className='flex justify-center w-4/6'>
             <div className="flex text-sm lg:flex-grow border-[#003049] border-2 
               rounded-md justify-around items-center"
             >

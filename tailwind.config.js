@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     colors: {
+      'custom_white': 'FEFAE0',
       'custom_yellow1': '#EAE2B7',
       'custom_yellow2': '#FCBF49',
       'custom_orange': '#F77F00',

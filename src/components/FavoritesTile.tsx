@@ -66,7 +66,7 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
             onSubmit={handleSubmit(onSubmitUpdate)}
             className="flex flex-direction-row justify-center py-5"
           >
-            <article className='container rounded-xl border-2 border-gray-700 bg-[#EAE2B7] 
+            <article className='container rounded-xl border-2 border-gray-700 bg-custom_yellow1 
               p-2 object-contain max-w-2xl'
             >
               <div className='flex flex-col md:flex-row items-center space-y-2'>
@@ -75,19 +75,19 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                   src={favData.url}
                   className='flex-2 max-w-md rounded-full object-contain shadow-xl aspect-auto'
                 />
-                <div className='flex flex-col m-auto justify-center p-1 bg-[#FCBF49] border-[#D62828] 
+                <div className='flex flex-col m-auto justify-center p-1 bg-custom_yellow2 border-custom_red 
                   border-2 rounded-md'>
-                  <h3 className='flex text-lg font-medium justify-center text-[#D62828]'>
+                  <h3 className='flex text-lg font-medium justify-center text-custom_red'>
                     Breed Name:
                   </h3>
-                  <h3 className='flex text-lg font-medium justify-center text-center text-[#D62828]'>
+                  <h3 className='flex text-lg font-medium justify-center text-center text-custom_red'>
                     {favData.breeds[0].name}
                   </h3>
                   {/* TODO: add in adoptable pets if time allows */}
                   {/* <div flex-1>
                     <ul className='m-1 flex flex-wrap justify-center'>
                       <li className='p-1 leading-none'>
-                        <a href='#' className='text-xs font-medium text-[#003049] text-center'>
+                        <a href='#' className='text-xs font-medium text-custom_blue text-center'>
                           Adoptable Pets for this Breed
                         </a>
                       </li>
@@ -95,8 +95,8 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                   </div> */}
                 </div>
               </div>
-              <ul className='mt-4 p-4 space-y-2 bg-[#FCBF49] border-[#D62828] 
-                text-[#003049] border-2 rounded-md'
+              <ul className='mt-4 p-4 space-y-2 bg-custom_yellow2 border-custom_red 
+                text-custom_blue border-2 rounded-md'
               >
                 <li>
                   <h5>
@@ -128,8 +128,8 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                     {`Temperament: ${favData.breeds[0].temperament}`}
                   </h5>
                 </li>
-                <li>
-                  <h5>
+                <li className="border-2 border-custom_red rounded-md py-1">
+                  <h5 className="text-center font-bold">
                     {`Previously written notes: ${prevNotes}`}
                   </h5>
                 </li>
@@ -137,10 +137,10 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
               <div className="my-2">
                 <label className='mx-2' htmlFor='notesele'>Notes:</label>
               </div>
-              <div className="bg-[#EAE2B7]">
+              <div className="bg-custom_yellow1">
                 <div className="flex justify-center w-250">
                   <textarea
-                    className="box-border w-9/12 rounded-md border-2 border-[#D62828] text-black p-2"
+                    className="box-border w-9/12 rounded-md border-2 border-custom_red text-black p-2"
                     {...register('notes')}
                     name='notes'
                     id="notesele"
@@ -154,12 +154,12 @@ const FavoritesTile: React.FC<FavoriteType> = ( favList ) => {
                 <button
                   type='submit'
                   id='favorite-update'
-                  className='py-2 px-4 m-4 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md text-[#003049] hover:text-white'
+                  className='py-2 px-4 m-4 bg-custom_yellow2 hover:bg-[#F77F00] justify-center border-custom_red border rounded-md text-custom_blue hover:text-white'
                 >
                   Edit Favorite
                 </button>  
                 <button onClick={deleteFav} type='button' id='favorite-delete'
-                  className='p-2 m-4 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md text-[#003049] hover:text-white'
+                  className='p-2 m-4 bg-custom_yellow2 hover:bg-[#F77F00] justify-center border-custom_red border rounded-md text-custom_blue hover:text-white'
                 >
                   Delete Favorite
                 </button>

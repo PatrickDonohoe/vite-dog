@@ -15,7 +15,7 @@ const ClickButton = (props: ClickButtonProps) => {
       >
         <div>
           <Link to={ props.route } onClick={props.onClick} className='flex place-itmes-center  
-                lg:inline-block lg:mt-0 text-custom_blue hover:text-white'
+                md:inline-block lg:mt-0 text-custom_blue hover:text-custom_white'
           >
             <i className={ props.icon }></i> { props.linkText }
           </Link>
