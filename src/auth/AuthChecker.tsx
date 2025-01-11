@@ -21,7 +21,7 @@ const AuthChecker = ({ children }: Props) => {
     // if not in auth_user, create_profile; if so, continue
     useEffect(() => {
         if (!isLoading && isAuthenticated) {
-            navigate('/search');
+            navigate('/twsearch');
         }
     }, [isLoading, isAuthenticated, navigate]);
 

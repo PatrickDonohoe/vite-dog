@@ -1,7 +1,8 @@
-import Home from '../pages/Home';
-import Results from '../pages/Results';
-import Favorites from '../pages/Favorites';
 import { FC } from 'react';
+
+import Home from '../pages/Home';
+import Favorites from '../pages/Favorites';
+import TWSearch from '../pages/TWSearch';
 
 interface RouteType {
     path: string,
@@ -24,9 +25,9 @@ const routes: RouteType[] = [
         protected: true,
     },
     {
-        path: "/search",
-        component: Results,
-        name: "Search",
+        path: "/twsearch",
+        component: TWSearch,
+        name: "TWSearch",
         protected: true,
     }
 ];

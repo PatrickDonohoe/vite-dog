@@ -1,11 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import NavButton from './NavButton';
+import ClickButton from './ClickButton';
+
+const mobileMediaQuery = '(max-width: 767px)';
+
 function Navbar() {
 
-  const [isVisible, setIsVisible] = useState(false)
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [isSmall, setIsSmall] = useState(window.matchMedia(mobileMediaQuery).matches);
+
+  useEffect(() => {
+    const query = window.matchMedia(mobileMediaQuery);
+
+    function handleQueryChange(queryEvent: { matches: boolean | ((prevState: boolean) => boolean); }) {
+      setIsSmall(queryEvent.matches);
+    };
+
+    query.addEventListener('change', handleQueryChange);
+
+    return () => {
+      query.removeEventListener('change', handleQueryChange);
+    };
+  }, []);
 
   const signOutOnClick = () => {
     logout();
@@ -19,81 +40,113 @@ function Navbar() {
     setIsVisible(!isVisible)
   }
 
-  const clicked = () => {
-    setIsVisible(false)
-  }
+  // const clicked = () => {
+  //   setIsVisible(false)
+  // }
 
   return (
-    <nav className='flex items-center justify-between flex-wrap bg-[#EAE2B7] p-6 sticky top-0 w-full z-10'>
-      <div className='flex items-center flex-shrink-0 text-[#003049] hover:text-[#D62828] mr-6'>
-        <Link to='/' className='font-semibold text-xl tracking-tight'>
+    // TODO: add hover text for nav icons
+    <nav className='flex flex-direction-row justify-around items-center bg-[#EAE2B7] 
+      border-solid border-2 border-black rounded-sm px-2 md:px-6 py-2 md:py-4 sticky 
+      top-0 w-full h-24 z-10'
+    >
+      <div className='flex items-center justify-center flex-shrink-0 mr-2 bg-[#FCBF49] 
+        p-4 m-5 border border-[#D62828] rounded-md'
+      >
+        <Link to='/' className='flex font-semibold text-xl tracking-tight text-[#003049] 
+          hover:text-[#D62828]'
+        >
           Dog Breeds
         </Link>
       </div>
-      <div className='block'>
-        <button onClick={dropDown} className='flex items-center px-3 py-2 
+      
+
+      {/* if the window is small & dropDown is true. display the menu with icons only */}
+      {(isSmall && isVisible) ?
+        (
+          <div className='flex justify-around items-center w-2/3'>
+            <div className="flex items-center text-sm lg:flex-grow border-[#003049] border-2 
+              rounded-md justify-around h-16 w-3/4"
+            >
+              {/* Home Button */}
+              <NavButton icon='fa-solid fa-house' route='/' />
+
+              {
+                !isAuthenticated ?
+                  // Login Button
+                  <ClickButton 
+                    icon='fa-solid fa-right-to-bracket' 
+                    route='/'
+                    onClick={signInOnClick}
+                  />
+                  :
+                  <>
+                    {/* Search Button */}
+                    <NavButton icon='fa-solid fa-magnifying-glass' route='/twsearch'/>
+                    {/* Favorites Button */}
+                    <NavButton icon='fa-solid fa-heart' route='/favorites'/>
+                    {/* Logout Button */}
+                    <ClickButton 
+                      icon='fa-solid fa-door-open' 
+                      route='/' 
+                      onClick={signOutOnClick}
+                    />
+                  </>
+              }
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        {/* if isSmall, show hamburger, else show full navbar */}
+      {isSmall ?
+        (
+          <div className='block'>
+            {/* Hamburger Button */}
+            <button onClick={dropDown} className='flex items-center px-3 py-2 
           text-[#003049] border rounded border-[#003049] hover:text-[#D62828] 
           hover:border-[#D62828]'
-        >
-          <i className='fas fa-bars'></i>
-        </button>
-      </div>
-      {isVisible ? (
-        <div className='w-full block flex-grow items-center mt-2'>
-          <div className="text-sm lg:flex-grow border-[#003049] border-2 rounded-md">
-            <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-              <div>
-                <Link to='' onClick={clicked} className='flex place-itmes-center mt-4 
-                lg:inline-block lg:mt-0 text-[#003049] hover:text-[#EAE2B7]'
-                >
-                  Home
-                </Link>
-              </div>
+            >
+              <i className='fas fa-bars'></i>
             </button>
-
-            {
-              !isAuthenticated ?
-                <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                  <div>
-                    <Link to='/' onClick={signInOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-[#EAE2B7]'>
-                      Login
-                    </Link>
-                  </div>
-                </button>
-                :
-                <>
-                  <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                    <div>
-                      <Link to='/search' onClick={clicked} className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-[#EAE2B7]' 
-                      >
-                        Search
-                      </Link>
-                    </div>
-                  </button>
-                  <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                    <div>
-                      <Link to='/favorites' onClick={clicked} className='flex place-itmes-center mt-4 
-                        lg:inline-block lg:mt-0 text-[#003049] hover:text-[#EAE2B7]'
-                      >
-                        Favorites
-                      </Link>
-                    </div>
-                  </button>
-                  <button className='p-3 m-5 bg-[#FCBF49] hover:bg-[#F77F00] justify-center border-[#D62828] border rounded-md'>
-                      <div>
-                          <Link to='/' onClick={signOutOnClick} className='flex place-items-center mt-4 lg:inline-block lg:mt-0 text-[#003049] hover:text-[#EAE2B7]'>
-                              Logout
-                          </Link>
-                      </div>
-                  </button>
-                </>
-            }
           </div>
-        </div>
-      ) : (
-        <></>
-      )}
+        )
+        :
+        (
+          <div className='flex justify-center w-4/6'>
+            <div className="flex text-sm lg:flex-grow border-[#003049] border-2 
+              rounded-md justify-around items-center"
+            >
+              {/* Home Button */}
+              <NavButton icon='fa-solid fa-house' route='/' linkText=' Home'/>
+
+              {
+                !isAuthenticated ?
+                  // Login Button
+                  <ClickButton 
+                    icon='fa-solid fa-right-to-bracket' 
+                    route='/' 
+                    linkText=' Login' 
+                    onClick={signInOnClick}
+                  />
+                  :
+                  <>
+                    <NavButton icon='fa-solid fa-magnifying-glass' route='/twsearch' linkText=' Search'/>
+                    {/* Favorites Button */}
+                    <NavButton icon='fa-solid fa-heart' route='/favorites' linkText=' Favorites'/>
+                    {/* Logout Button */}
+                    <ClickButton 
+                      icon='fa-solid fa-door-open' 
+                      route='/' 
+                      linkText=' Logout' 
+                      onClick={signOutOnClick}
+                    />
+                  </>
+              }
+            </div>
+          </div>
+        )
+      }
     </nav>
   )
 }

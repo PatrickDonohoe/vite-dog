@@ -1,30 +1,24 @@
+# Dog Research Web App
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Welcome. This single page web app was made to help prospective dog owners research and keep notes on breeds they are interested in purchasing.
 
-Currently, two official plugins are available:
+## Frontend:
+Tech used: HTML, CSS, TypeScript, and React Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Backend:
+The backend is stored in a separate repository [here](https://github.com/PatrickDonohoe/flask-dog).
+Tech used: Python and Flask.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## How to run the application:
+After cloning the repository, enter:
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+cd vite-dog
+npm i
+npm run dev
+```
+## Data Flow and Functionality:
+Users can navigate from the homepage to the *Search* page to begin researching dog breeds. When the user selects a breed, the ID for the breed is retrieved and ready for submission. After the user clicks the submit button, an API call is made to retrieve the breed information and picture. The data in the returned JSON object is passed as props to the *TWResultsTile* component.
+The user can then add notes about the breed and choose to save it as a favorite or choose another breed. If the breed is saved as a favorite; the user ID, dog ID, and the user's notes are all saved in the database.
+The user can also navigate to the *Favorites* page to look at their previously selected favorite breeds. Upon loading the page, an API call is made to the database to retrieve the favorited breeds for that user. The information is passed as props to the *FavoritesTile* component via a mapped array. The user can then edit their comments or delete the breed from their favorites list.
